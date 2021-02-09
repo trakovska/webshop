@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Web Shop!</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+<div class="container-fluid">
+  <div class="separator">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+         <div class="card">
+         <div class="card-body">
+             <form method="post" onsubmit="return login();">
+             <div class="form-group mb-3">
+               <label for="exampleInputEmail1">Email address</label>
+         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+           </div>
+             <div class="form-group">
+               <label for="exampleInputPassword1">Password</label>
+               <input type="password" class="form-control" id="password" placeholder="Password">
+             </div>
+             <button type="submit" class="btn btn-primary w-100" onclick="return login();">Login</button>
+           </form>
+       </div>
+     </div>
+       </div>
+       </div>
+     </div>
+   </div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+// username: "ribiczijah@gmail.com",
+// password: "SuperPassword!@#"
+
+
+  console.log(window.localStorage.getItem("TOKEN"));
+  console.log(window.localStorage.getItem("TOKEN_TYPE"));
+
+  function login() {
+
+  var username = $("#email").val();
+  var password = $("#password").val();
+
+$.ajax({
+  type: 'POST',
+  url:'https://scu-kursevi.herokuapp.com/api/auth/login',
+  dataType: 'json',
+  contentType: "application/json",
+  data: JSON.stringify({
+    username: username,
+    password: password
+  })
+}).then(function(data) {
+   console.log(data.accessToken);
+   console.log(data.tokenType);
+
+   window.localStorage.setItem("TOKEN", data.accesToken);
+    window.localStorage.setItem("TOKEN_TYPE", data.tokenType);
+}).done(function(){
+});
+}
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+
+  </body>
+</html>
